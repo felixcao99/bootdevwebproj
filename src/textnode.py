@@ -9,10 +9,10 @@ class TextType(Enum):
     IMAGE = "image"
 
 class TextNode:
-    def __init__(self, text: str, text_type: TextType):
+    def __init__(self, text: str, text_type: TextType, url: str = None):
         self.text = text
         self.text_type = text_type
-        self.url = None
+        self.url = url
 
     def __eq__(self, node):
         return self.text_type == node.text_type and self.text == node.text and self.url == node.url
