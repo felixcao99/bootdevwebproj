@@ -4,7 +4,7 @@ from htmlnode import *
 from textnode import *
 from leafnode import *
 from parentnode import *
-from main import text_node_to_html_node
+from textnotetohtmlnode import text_node_to_html_node
 
 
 class TestTEXTNodeToHTMLNode(unittest.TestCase):
