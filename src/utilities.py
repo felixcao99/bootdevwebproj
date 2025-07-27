@@ -51,7 +51,7 @@ def extract_title(markdown):
             return line[2:]
     return None
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath=None):
     from_abspath = os.path.abspath(from_path)
     template_abspath = os.path.abspath(template_path)
     dest_abspath = os.path.abspath(dest_path)
@@ -79,6 +79,9 @@ def generate_page(from_path, template_path, dest_path):
     title = extract_title(md_content)
     html_page_content = template_content.replace('{{ Content }}', html_content)
     html_page_content = html_page_content.replace('{{ Title }}', title)
+    if basepath:
+        html_page_content = html_page_content.replace('href="/', 'href="' + basepath)
+        html_page_content = html_page_content.replace('src="/', 'src="' + basepath)
     with open(dest_abspath, 'w', encoding='utf-8') as dest_f:
         dest_f.write(html_page_content)
 
@@ -93,7 +96,7 @@ def get_all_md_files(source_dir, extension=None):
     return files
 
 
-def generate_pages_recursive(source_dir, template_file_path, dest_dir):
+def generate_pages_recursive(source_dir, template_file_path, dest_dir, basepath=None):
     if not os.path.exists(source_dir):
         print(f'Error: The source directory {source_dir} does not exist.')
         return
@@ -109,4 +112,4 @@ def generate_pages_recursive(source_dir, template_file_path, dest_dir):
     md_files = get_all_md_files(source_dir, '.md')
     for md_file in md_files:
         dest_file = md_file.replace(source_dir, dest_dir).replace('.md', '.html')
-        generate_page(md_file, template_file_path, dest_file)
+        generate_page(md_file, template_file_path, dest_file, basepath)

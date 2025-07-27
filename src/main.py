@@ -1,12 +1,18 @@
-from textnode import *
-from parentnode import *
-from leafnode import *
+import sys
+# from textnode import *
+# from parentnode import *
+# from leafnode import *
 from utilities import *
 
+
 def main():
-    refresh_directory('./public/static', './public')
-    generate_pages_recursive('./content', './template.html', './public')
-    # generate_page('./content/index.md', './template.html', './public/index.html')
+    basepath = None
+    if len(sys.argv)> 1:
+        basepath = sys.argv[1]
+    
+    refresh_directory('./static', './docs')
+    generate_pages_recursive('./content', './template.html', './docs', basepath)
+
 
 
 main()
