@@ -91,7 +91,7 @@ def ulistblock_to_htmlnode(list):
         if not content:
             raise ValueError("Heading cannot be empty")
         children = text_to_children(content)
-        if len(children) > 1:
+        if len(children) > 0:
             list_items.append(ParentNode("li", children))
         else:
             list_items.append(LeafNode("li", content))
@@ -108,7 +108,7 @@ def olistblock_to_htmlnode(list):
         if not content:
             raise ValueError("Heading cannot be empty")
         children = text_to_children(content)
-        if len(children) > 1:
+        if len(children) > 0:
             list_items.append(ParentNode("li", children))
         else:
             list_items.append(LeafNode("li", content))
