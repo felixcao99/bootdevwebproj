@@ -17,7 +17,7 @@ def markdown_to_html_node(markdown):
             case BlockType.ULIST:
                 children_nodes.append(ulistblock_to_htmlnode(block))
             case BlockType.OLIST:
-                children_nodes.append(ulistblock_to_htmlnode(block))
+                children_nodes.append(olistblock_to_htmlnode(block))
             case _:
                 raise ValueError(f"Unknown block type for block: {block}")
     return ParentNode("div", children_nodes)
